@@ -1,5 +1,5 @@
 
-import Controller.SlideShow;
+import Model.SlideShow;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
