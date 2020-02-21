@@ -17,7 +17,7 @@ public class SlideShow extends ImageFile {
 
     private ArrayList<ImageFile> listImages;
     private File directory;
-    protected static int delay = 2500;
+    protected static int delay = 1000;
     private static int counter = 0;
 
     public SlideShow() throws HeadlessException {
@@ -32,9 +32,15 @@ public class SlideShow extends ImageFile {
         this.listImages = GetAllPictures(this.directory);
     }
 
+    public SlideShow(ArrayList<PictureTags> pictureTagsArrayList) {
+        this.listImages = GetAllPictures(pictureTagsArrayList);
+    }
+
+
+
     protected ImageIcon getResizedImage(ImageFile imageFile) {
         Image newImg = ((new ImageIcon(imageFile.getPath())).getImage())
-                .getScaledInstance(this.picture.getWidth(), this.picture.getHeight(), Image.SCALE_SMOOTH);
+                .getScaledInstance(picture.getWidth(), picture.getHeight(), Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
     }
 
@@ -57,6 +63,15 @@ public class SlideShow extends ImageFile {
         return returnArray;
     }
 
+    private ArrayList<ImageFile> GetAllPictures(ArrayList<PictureTags> pictureTagsArrayList) {
+        ArrayList<ImageFile> returnArray = new ArrayList<ImageFile>();
+        for (PictureTags pictureTag:
+             pictureTagsArrayList) {
+            returnArray.add(new ImageFile(pictureTag));
+        }
+        return returnArray;
+    }
+
     @Override
     public void Show() {
 
@@ -68,20 +83,33 @@ public class SlideShow extends ImageFile {
         timer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //loops while timer not end all pics
-                counter += 1;
+
+                //
+                //System.out.println(counter);
                 if (counter >= listImages.size()) {
                     counter = 0;
+
                     //picture.hide();
-                    dispose();
+                    //dispose();
+                    setVisible(false);
+                    picture.removeAll();
                     timer.stop();
+
                 }
+
                 picture.setIcon(getResizedImage(listImages.get(counter)));
+
+                //System.out.println(listImages.get(counter).getNameImage());
+                //System.out.println(listImages.get(counter).getPath());
+                counter += 1;
             }
 
         });
 
-        add(this.picture);
+        add(picture);
+
         timer.start();
+
         setLayout(null);
         setSize(width, height);
         getContentPane().setBackground(Color.decode(BACKGROUND));
@@ -89,5 +117,25 @@ public class SlideShow extends ImageFile {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
+
+    }
+
+
+
+    public void keepMass(int input) {
+        ArrayList<ImageFile> imageFileArrayList = new ArrayList<ImageFile>();
+        for (ImageFile imagefile:
+                this.listImages)
+            if (imagefile.getMass() <= input) imageFileArrayList.add(imagefile);
+
+        this.listImages = imageFileArrayList;
+    }
+
+    public ArrayList<ImageFile> getListImages() {
+        return listImages;
+    }
+
+    public void setListImages(ArrayList<ImageFile> listImages) {
+        this.listImages = listImages;
     }
 }
