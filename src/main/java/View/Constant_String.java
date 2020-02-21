@@ -14,5 +14,6 @@ public interface Constant_String {
     String INPUT_STRING_TAGS = "input.String.menuPictureTags";
     String INPUT_LANGUAGE = "input.string.language";
     String INPUT_ERROR = "input.string.error";
+    String INPUT_STRING_SIZE = "input.string.sizeoffile";
 
 }

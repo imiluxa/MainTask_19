@@ -70,6 +70,7 @@ public class Controller {
             switch (chooser) {
                 case 1:
                     slideShow.Show();
+                    view.printMessage(INPUT_STRING_SIZE);
                     view.print(String.valueOf(slideShow.getMassArray()));
                     break;
                 case 2:
