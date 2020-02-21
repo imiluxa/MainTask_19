@@ -10,6 +10,7 @@ import static View.Constant_String.*;
 public class ImageFile extends JFrame{
 
     private String path;
+
     protected static JLabel picture;
     //Hardcode
     protected static int height = 700;
