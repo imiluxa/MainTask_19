@@ -4,7 +4,6 @@ import Model.*;
 import View.*;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -24,44 +23,22 @@ public class Controller {
         this.view = view;
     }
 
-    public String inputValueWithScanner(Scanner scanner, String message, String regex){
-        String returnString;
-        view.printMessage(message);
-
-        while( !(scanner.hasNext() && (returnString = scanner.next()).matches(regex))) {
-            view.printMessage(INPUT_ERROR);
-            view.printMessage(INPUT_LANGUAGE);
-        }
-
-        return returnString;
-    }
-
     public void processUser() {
         sc = new Scanner(System.in);
         view.setLocale(chooseLanguage(sc));
         fillArrays();
 
         processMenu(sc);
+        slideShow.dispose();
     }
 
     public Locale chooseLanguage(Scanner scanner){
 
         return Integer.parseInt(inputValueWithScanner(scanner, INPUT_LANGUAGE, REGEX_LANGUAGE)) == 1
                         ? new Locale("en") : new Locale("ua");
-
     }
 
     public void fillArrays() {
-        /*
-        model.addDateRange(Date_Range.TODAY);
-        model.addDateRange(Date_Range.THISWEEK);
-        model.addDateRange(Date_Range.THISMONTH);
-        model.addDateRange(Date_Range.THISYEAR);
-        model.addFileMass(FileMass.LESSONEMB);
-        model.addFileMass(FileMass.LESSTHREEMB);
-        model.addFileMass(FileMass.LESSTENMB);
-        model.addFileMass(FileMass.LESSGB);
-        */
         model.addPictureTags(PictureTags.ONE);
         model.addPictureTags(PictureTags.TWO);
         model.addPictureTags(PictureTags.THREE);
@@ -72,19 +49,17 @@ public class Controller {
         model.addPictureTags(PictureTags.EIGHT);
         model.addPictureTags(PictureTags.NINE);
         model.addPictureTags(PictureTags.TEN);
+        model.addNameTag(NameTags.ANIMALS);
+        model.addNameTag(NameTags.WORLD);
+        model.addNameTag(NameTags.GOT);
+        model.addNameTag(NameTags.MEMS);
     }
 
     public void processMenu(Scanner sc) {
-        //File directory = new File ("F:\\external_classes\\MainTask_19\\src\\img");
-        //System.out.println(PATH + "4.jpg");
-        //ImageFile imageFile = new ImageFile(PATH + "4.jpg");
-        //imageFile.Show();
-
-
 
         boolean exitFlag = false;
         int chooser = 0;
-        slideShow = new SlideShow(model.getPictureTagsList());
+        slideShow = new SlideShow(Model.getPictureTagsList());
 
         while (!exitFlag) {
             chooser = 0;
@@ -95,44 +70,35 @@ public class Controller {
             switch (chooser) {
                 case 1:
                     slideShow.Show();
+                    view.printMessage(String.valueOf(slideShow.getMassArray()));
                     break;
                 case 2:
-                    slideShow.setListImages(keepDate(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_DATES, REGEX_NUMBER))
-                            , slideShow.getListImages()));
-                    //view.printMessage(INPUT_STRING_DATA);
+                    slideShow.keepDate(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_DATES, REGEX_NUMBERS)));
                     break;
                 case 3:
-                    slideShow.keepMass(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_MASS, REGEX_NUMBER)));
-                    //view.printMessage(INPUT_STRING_DATA);
+                    slideShow.keepMass(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_MASS, REGEX_NUMBERS)));
                     break;
                 case 4:
-                    System.out.print("Get back!");
+                    slideShow.keepTag(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_TAGS, REGEX_NUMBER)));
                     break;
                 case 5:
                     exitFlag = true;
                     break;
             }
 
-
-
         }
-
-
-
-
-
-
-        //slideShow.printAllObjectsInListImages();
 
     }
 
-    public ArrayList<ImageFile> keepDate(int input, ArrayList<ImageFile> imageFileArrayList) {
-        ArrayList<ImageFile> imageFileArrayListOut = new ArrayList<ImageFile>();
-        for (ImageFile imagefile:
-                imageFileArrayList)
-            if (imagefile.getDate() <= input) imageFileArrayListOut.add(imagefile);
+    public String inputValueWithScanner(Scanner scanner, String message, String regex){
+        String returnString;
+        view.printMessage(message);
 
-        return imageFileArrayListOut;
+        while( !(scanner.hasNext() && (returnString = scanner.next()).matches(regex))) {
+            view.printMessage(INPUT_ERROR);
+        }
+
+        return returnString;
     }
 
 }

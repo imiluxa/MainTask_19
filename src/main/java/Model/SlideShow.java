@@ -1,6 +1,5 @@
 package Model;
 
-//import ImageFile;
 import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 
 import javax.swing.*;
@@ -35,8 +34,6 @@ public class SlideShow extends ImageFile {
     public SlideShow(ArrayList<PictureTags> pictureTagsArrayList) {
         this.listImages = GetAllPictures(pictureTagsArrayList);
     }
-
-
 
     protected ImageIcon getResizedImage(ImageFile imageFile) {
         Image newImg = ((new ImageIcon(imageFile.getPath())).getImage())
@@ -83,33 +80,20 @@ public class SlideShow extends ImageFile {
         timer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //loops while timer not end all pics
-
-                //
-                //System.out.println(counter);
                 if (counter >= listImages.size()) {
                     counter = 0;
-
-                    //picture.hide();
-                    //dispose();
                     setVisible(false);
                     picture.removeAll();
                     timer.stop();
-
                 }
 
                 picture.setIcon(getResizedImage(listImages.get(counter)));
-
-                //System.out.println(listImages.get(counter).getNameImage());
-                //System.out.println(listImages.get(counter).getPath());
                 counter += 1;
             }
-
         });
 
         add(picture);
-
         timer.start();
-
         setLayout(null);
         setSize(width, height);
         getContentPane().setBackground(Color.decode(BACKGROUND));
@@ -117,16 +101,41 @@ public class SlideShow extends ImageFile {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-
     }
 
+    public int getMassArray() {
+        int returnValue = 0;
+        for (ImageFile imageFile:
+             this.listImages) {
+            returnValue += imageFile.getMass();
+        }
+        return returnValue;
+    }
 
+    public void keepDate(int input) {
+        ArrayList<ImageFile> imageFileArrayListOut = new ArrayList<ImageFile>();
+        for (ImageFile imagefile:
+                this.listImages)
+            if (imagefile.getDate() <= input) imageFileArrayListOut.add(imagefile);
+
+        this.listImages = imageFileArrayListOut;
+    }
 
     public void keepMass(int input) {
         ArrayList<ImageFile> imageFileArrayList = new ArrayList<ImageFile>();
         for (ImageFile imagefile:
                 this.listImages)
             if (imagefile.getMass() <= input) imageFileArrayList.add(imagefile);
+
+        this.listImages = imageFileArrayList;
+    }
+
+    public void keepTag(int input) {
+        ArrayList<ImageFile> imageFileArrayList = new ArrayList<ImageFile>();
+
+        for (ImageFile imagefile:
+                this.listImages)
+            if (imagefile.getTag().equals(NameTags.getTagById(input))) imageFileArrayList.add(imagefile);
 
         this.listImages = imageFileArrayList;
     }

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class Model {
 
-    private static ArrayList<Date_Range> date_rangeList = new ArrayList<Date_Range>();
-    private static ArrayList<FileMass> fileMassList = new ArrayList<FileMass>();
+    private static ArrayList<NameTags> nameTagsList = new ArrayList<NameTags>();
     private static ArrayList<PictureTags> pictureTagsList = new ArrayList<PictureTags>();
 
     public void addPictureTags(PictureTags pictureTags) {
@@ -20,28 +19,16 @@ public class Model {
         Model.pictureTagsList = pictureTagsList;
     }
 
-    public void addFileMass(FileMass fileMass) {
-        fileMassList.add(fileMass);
+    public void addNameTag(NameTags nameTags) {
+        nameTagsList.add(nameTags);
     }
 
-    public static ArrayList<FileMass> getFileMassList() {
-        return fileMassList;
+    public static ArrayList<NameTags> getNameTagsList() {
+        return nameTagsList;
     }
 
-    public static void setFileMassList(ArrayList<FileMass> fileMassList) {
-        Model.fileMassList = fileMassList;
-    }
-
-    public void addDateRange(Date_Range date_range) {
-        date_rangeList.add(date_range);
-    }
-
-    public static ArrayList<Date_Range> getDate_rangeList() {
-        return date_rangeList;
-    }
-
-    public static void setDate_rangeList(ArrayList<Date_Range> date_rangeList) {
-        Model.date_rangeList = date_rangeList;
+    public static void setNameTagsList(ArrayList<NameTags> nameTagsList) {
+        Model.nameTagsList = nameTagsList;
     }
 
 }

@@ -6,10 +6,10 @@ public enum PictureTags {
     TWO(new ImageFile("2.jpg",1, 4, "Mems")),
     THREE(new ImageFile("3.jpg", 1, 7, "GoT")),
     FOUR(new ImageFile("4.jpg", 2, 12, "Mems")),
-    FIVE(new ImageFile("5.jpg",2, 110, "Animals")),
+    FIVE(new ImageFile("5.jpg",2, 110, "World")),
     SIX(new ImageFile("6.jpg",2, 30, "World")),
     SEVEN(new ImageFile("7.jpg",33, 60, "World")),
-    EIGHT(new ImageFile("8.jpg",46, 90, "World")),
+    EIGHT(new ImageFile("8.jpg",46, 90, "Animals")),
     NINE(new ImageFile("9.jpg",360, 1050, "Animals")),
     TEN(new ImageFile("10.jpg",370, 2000, "GoT"));
 

@@ -77,7 +77,6 @@ public class ImageFile extends JFrame{
 
         add(this.picture);
 
-
         this.picture.setIcon(getResizedImage());
         setLayout(null);
         setSize(width, height);
