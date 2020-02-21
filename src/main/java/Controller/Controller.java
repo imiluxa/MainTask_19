@@ -70,7 +70,7 @@ public class Controller {
             switch (chooser) {
                 case 1:
                     slideShow.Show();
-                    view.printMessage(String.valueOf(slideShow.getMassArray()));
+                    view.print(String.valueOf(slideShow.getMassArray()));
                     break;
                 case 2:
                     slideShow.keepDate(Integer.parseInt(inputValueWithScanner(sc, INPUT_STRING_DATES, REGEX_NUMBERS)));

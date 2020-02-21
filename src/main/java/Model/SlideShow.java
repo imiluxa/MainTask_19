@@ -80,15 +80,17 @@ public class SlideShow extends ImageFile {
         timer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //loops while timer not end all pics
-                if (counter >= listImages.size()) {
+                if (counter < listImages.size()) {
+                    picture.setIcon(getResizedImage(listImages.get(counter)));
+                    counter++;
+                } else {
+                    picture.setIcon(null);
                     counter = 0;
                     setVisible(false);
                     picture.removeAll();
                     timer.stop();
                 }
 
-                picture.setIcon(getResizedImage(listImages.get(counter)));
-                counter += 1;
             }
         });
 
